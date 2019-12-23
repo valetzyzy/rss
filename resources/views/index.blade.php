@@ -13,7 +13,9 @@
 <body>
 
 
-<div id="app"></div>
+<div id="app">
+    <app></app>
+</div>
 
 
 <script src="{{ asset('js/build.js') }}"></script>

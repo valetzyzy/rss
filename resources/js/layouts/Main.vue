@@ -1,31 +1,14 @@
 <template>
-  <div class="container">
-    <ul>
-      <li>
-        <v-link href="/">Home</v-link>
-        <v-link href="/about">About</v-link>
-      </li>
-    </ul>
-
-    <slot></slot>
-  </div>
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <router-view></router-view>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
-
 <script>
-  import VLink from '../components/VLink.vue'
-
-  export default {
-    components: {
-      VLink
-    }
-  }
+    export default {}
 </script>
-
-<style scoped>
-  .container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 15px 30px;
-    background: #f9f7f5;
-  }
-</style>
