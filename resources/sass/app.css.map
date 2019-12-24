@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAQ,iEAAsD;AACtD,+DAAoD;AACpD,uCAA4B;AAC5B,qDAA0C;AAC1C,qDAA0C;AAC1C,2CAAgC;AAChC,uDAA4C;AAC5C,yBAAc;AACd,yBAAc",
+"sources": ["app.scss"],
+"names": [],
+"file": "app.css"
+}

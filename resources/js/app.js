@@ -22,13 +22,22 @@ import Vue from 'vue'
 //   app.currentRoute = window.location.pathname
 // })
 import VueRouter from 'vue-router'
+import axios from 'axios';
+import VueAxios from 'vue-axios';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
+Vue.use(VueAxios, axios);
+
+axios.defaults.baseURL = 'http://localhost:8035/api';
+
+Vue.use(require('@websanova/vue-auth'), {
+    auth: require('@websanova/vue-auth/drivers/auth/bearer.js'),
+    http: require('@websanova/vue-auth/drivers/http/axios.1.x.js'),
+    router: require('@websanova/vue-auth/drivers/router/vue-router.2.x.js'),
+});
 
 import App from './layouts/Main.vue'
 import routes from './routes'
-import SignIn from "./pages/SignIn.vue"
-import SignUp from "./pages/SignUp.vue"
 
 const router = new VueRouter({
     mode: 'history',

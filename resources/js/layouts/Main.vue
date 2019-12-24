@@ -1,11 +1,7 @@
 <template>
-    <div>
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12">
-                    <router-view></router-view>
-                </div>
-            </div>
+    <div class="limiter signUp-form">
+        <div class="container-login100">
+            <router-view></router-view>
         </div>
     </div>
 </template>
