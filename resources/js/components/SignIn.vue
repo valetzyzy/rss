@@ -7,7 +7,7 @@
 						Account Login
 					</span>
 
-                    <div class="wrap-input100 rs1 validate-input" data-validate = "Username is required">
+                    <div class="wrap-input100 rs1 validate-input" data-validate="Username is required">
                         <input class="input100" type="email" v-model="email">
                         <span class="label-input100">Email</span>
                     </div>
@@ -37,27 +37,26 @@
 <script>
     export default {
         data() {
-          return {
-              loggingIn: false,
-              email: '',
-              password: ''
-          }
+            return {
+                loggingIn: false,
+                email: '',
+                password: ''
+            }
         },
         methods: {
             onSubmit(event) {
-                // this.loggingIn = true;
                 let app = this
                 this.$auth.login({
                     data: {
                         email: app.email,
                         password: app.password
                     },
-                    success: function (data) {},
+                    success: function () {},
                     error: function (err) {
-                        console.log(err);
+                        console.log(err)
                     },
                     rememberMe: true,
-                    redirect: '/news',
+                    redirect: '/',
                     fetchUser: false,
                 });
             }

@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 6.9.0 on 2019-12-24 11:04:34.
+ * Generated for Laravel 6.9.0 on 2020-01-02 16:42:30.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -14693,6 +14693,252 @@ namespace Illuminate\Support {
  
 }
 
+namespace Nathanmac\Utilities\Parser\Facades { 
+
+    /**
+     * Parser Facade, supporting Laravel implementations.
+     *
+     * @package Nathanmac\Utilities\Parser\Facades
+     * @author Nathan Macnamara <nathan.macnamara@outlook.com>
+     * @license https://github.com/nathanmac/Parser/blob/master/LICENSE.md  MIT
+     */ 
+    class Parser {
+        
+        /**
+         * Get a subset of the items from the payload data.
+         *
+         * @param string|array $keys
+         * @return array 
+         * @static 
+         */ 
+        public static function only($keys)
+        {
+                        /** @var \Nathanmac\Utilities\Parser\Parser $instance */
+                        return $instance->only($keys);
+        }
+        
+        /**
+         * Get all of the input except for a specified array of items.
+         *
+         * @param string|array $keys
+         * @return array 
+         * @static 
+         */ 
+        public static function except($keys)
+        {
+                        /** @var \Nathanmac\Utilities\Parser\Parser $instance */
+                        return $instance->except($keys);
+        }
+        
+        /**
+         * Determine if the payload contains a non-empty value for a given key.
+         *
+         * @param string|array $keys
+         * @return bool 
+         * @static 
+         */ 
+        public static function has($keys)
+        {
+                        /** @var \Nathanmac\Utilities\Parser\Parser $instance */
+                        return $instance->has($keys);
+        }
+        
+        /**
+         * Retrieve an payload item from the payload data, return default item if item not found.
+         *
+         * @param string $key
+         * @param string $default
+         * @return mixed|null 
+         * @static 
+         */ 
+        public static function get($key = null, $default = null)
+        {
+                        /** @var \Nathanmac\Utilities\Parser\Parser $instance */
+                        return $instance->get($key, $default);
+        }
+        
+        /**
+         * Mask input data with a given mapping.
+         *
+         * @param array $mask
+         * @return array 
+         * @static 
+         */ 
+        public static function mask($mask)
+        {
+                        /** @var \Nathanmac\Utilities\Parser\Parser $instance */
+                        return $instance->mask($mask);
+        }
+        
+        /**
+         * Parse the HTTP payload data, autodetect format and return all data in array.
+         * 
+         * Override the format by providing a content type.
+         *
+         * @param string $format
+         * @return array 
+         * @static 
+         */ 
+        public static function payload($format = '')
+        {
+                        /** @var \Nathanmac\Utilities\Parser\Parser $instance */
+                        return $instance->payload($format);
+        }
+        
+        /**
+         * Alias to the payload function.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function all()
+        {
+                        /** @var \Nathanmac\Utilities\Parser\Parser $instance */
+                        return $instance->all();
+        }
+        
+        /**
+         * Autodetect the payload data type using content-type value.
+         *
+         * @return string Return the name of the formatter class.
+         * @static 
+         */ 
+        public static function getFormatClass($format = '')
+        {
+                        /** @var \Nathanmac\Utilities\Parser\Parser $instance */
+                        return $instance->getFormatClass($format);
+        }
+        
+        /**
+         * Parse payload string using given formatter.
+         *
+         * @param string $payload
+         * @param \Nathanmac\Utilities\Parser\FormatInterface $format
+         * @return array 
+         * @static 
+         */ 
+        public static function parse($payload, $format)
+        {
+                        /** @var \Nathanmac\Utilities\Parser\Parser $instance */
+                        return $instance->parse($payload, $format);
+        }
+        
+        /**
+         * Register Format Class.
+         *
+         * @param $format
+         * @param $class
+         * @throws InvalidArgumentException
+         * @return self 
+         * @static 
+         */ 
+        public static function registerFormat($format, $class)
+        {
+                        /** @var \Nathanmac\Utilities\Parser\Parser $instance */
+                        return $instance->registerFormat($format, $class);
+        }
+        
+        /**
+         * XML parser, helper function.
+         *
+         * @param $payload
+         * @throws Exceptions\ParserException
+         * @return array 
+         * @static 
+         */ 
+        public static function xml($payload)
+        {
+                        /** @var \Nathanmac\Utilities\Parser\Parser $instance */
+                        return $instance->xml($payload);
+        }
+        
+        /**
+         * JSON parser, helper function.
+         *
+         * @param $payload
+         * @throws Exceptions\ParserException
+         * @return array 
+         * @static 
+         */ 
+        public static function json($payload)
+        {
+                        /** @var \Nathanmac\Utilities\Parser\Parser $instance */
+                        return $instance->json($payload);
+        }
+        
+        /**
+         * BSON parser, helper function.
+         *
+         * @param $payload
+         * @throws Exceptions\ParserException
+         * @return array 
+         * @static 
+         */ 
+        public static function bson($payload)
+        {
+                        /** @var \Nathanmac\Utilities\Parser\Parser $instance */
+                        return $instance->bson($payload);
+        }
+        
+        /**
+         * Serialized Data parser, helper function.
+         *
+         * @param $payload
+         * @throws Exceptions\ParserException
+         * @return array 
+         * @static 
+         */ 
+        public static function serialize($payload)
+        {
+                        /** @var \Nathanmac\Utilities\Parser\Parser $instance */
+                        return $instance->serialize($payload);
+        }
+        
+        /**
+         * Query String parser, helper function.
+         *
+         * @param $payload
+         * @return array 
+         * @static 
+         */ 
+        public static function querystr($payload)
+        {
+                        /** @var \Nathanmac\Utilities\Parser\Parser $instance */
+                        return $instance->querystr($payload);
+        }
+        
+        /**
+         * YAML parser, helper function.
+         *
+         * @param $payload
+         * @throws Exceptions\ParserException
+         * @return array 
+         * @static 
+         */ 
+        public static function yaml($payload)
+        {
+                        /** @var \Nathanmac\Utilities\Parser\Parser $instance */
+                        return $instance->yaml($payload);
+        }
+        
+        /**
+         * MSGPack parser, helper function.
+         *
+         * @param $payload
+         * @throws Exceptions\ParserException
+         * @return array 
+         * @static 
+         */ 
+        public static function msgpack($payload)
+        {
+                        /** @var \Nathanmac\Utilities\Parser\Parser $instance */
+                        return $instance->msgpack($payload);
+        }
+         
+    }
+ 
+}
+
 namespace Facade\Ignition\Facades { 
 
     /**
@@ -18354,6 +18600,8 @@ namespace  {
     class Mail extends \Illuminate\Support\Facades\Mail {}
 
     class Notification extends \Illuminate\Support\Facades\Notification {}
+
+    class Parser extends \Nathanmac\Utilities\Parser\Facades\Parser {}
 
     class Password extends \Illuminate\Support\Facades\Password {}
 

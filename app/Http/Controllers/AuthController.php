@@ -27,8 +27,6 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-        $credentials = request(['email', 'password']);
-
         $user = User::where('email', '=', $request->get('email'))->first();
 
         if (!$user || !$token = auth()->login($user)) {
@@ -43,7 +41,7 @@ class AuthController extends Controller
      *
      * @return JsonResponse
      */
-    public function me()
+    public function user()
     {
         return response()->json(auth()->user());
     }
@@ -109,9 +107,8 @@ class AuthController extends Controller
     protected function respondWithToken($token)
     {
         return response()->json([
-            'access_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
-        ]);
+            'token' => $token,
+            'status' => 'success'
+        ])->header('Authorization', $token);
     }
 }

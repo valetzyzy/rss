@@ -20,6 +20,13 @@ Route::group([
     Route::post('register', 'AuthController@register');
     Route::post('login', 'AuthController@login');
     Route::post('logout', 'AuthController@logout');
-    Route::post('refresh', 'AuthController@refresh');
-    Route::post('me', 'AuthController@me');
+    Route::get('refresh', 'AuthController@refresh');
+    Route::get('user', 'AuthController@user');
+});
+
+Route::group([
+//    'middleware' => 'auth'
+], function ($router) {
+    Route::get('xml', 'Api\FeedController@getXml');
+    Route::get('words', 'Api\FeedController@getWords');
 });
