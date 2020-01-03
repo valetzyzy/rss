@@ -2,7 +2,7 @@ import SignIn from "./components/SignIn.vue"
 import SignUp from "./components/SignUp.vue"
 import Forgot from "./components/Forgot.vue"
 import Dashboard from "./components/Dashboard.vue"
-import News from "./components/News.vue"
+import CommonWords from "./components/CommonWords.vue"
 import VueRouter from "vue-router"
 import Vue from "vue"
 
@@ -24,19 +24,21 @@ const router = new VueRouter({
             meta: {auth: false}
         },
         {
-            path: '/signUp',
-            name: 'signUp',
-            component: SignUp
+            path: '/register',
+            name: 'register',
+            component: SignUp,
+            meta: {auth: false}
         },
         {
             path: '/forgot',
             name: 'forgot',
-            component: Forgot
+            component: Forgot,
+            meta: {auth: false}
         },
         {
-            path: '/news',
-            name: 'news',
-            component: News,
+            path: '/commonWords',
+            name: 'commonWords',
+            component: CommonWords,
             meta: {auth: true}
         },
     ]

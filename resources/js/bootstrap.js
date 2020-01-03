@@ -1,4 +1,5 @@
 window._ = require('lodash');
+window.$ = $ = require('jquery');
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -23,3 +24,12 @@ if (token) {
 } else {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
+
+$('body').on('blur', 'input', function () {
+    if($(this).val().trim() != "") {
+        $(this).addClass('has-val');
+    }
+    else {
+        $(this).removeClass('has-val');
+    }
+})

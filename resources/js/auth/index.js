@@ -7,12 +7,11 @@ const config = {
     http: axios,
     router,
     tokenStorage: ['localStorage'],
-    // registerData: { url: 'auth/register', method: 'POST', redirect: '' },
-    // loginData: { url: '/asdas', method: 'POST', redirect: 'asdasdsa', fetchUser: true },
-    // logoutData: { url: 'auth/logout', method: 'POST', redirect: '/', makeRequest: true },
-    // fetchData: {url: 'auth/user', method: 'GET', enabled: true},
-    // addToCartData: {url: 'cart/store', method: 'POST', makeRequest: true},
-    // refreshData: { url: 'auth/refresh', method: 'GET', enabled: true, interval: 30 }
+    registerData: { url: 'auth/register', method: 'POST', redirect: '/' },
+    loginData: { url: '/auth/login', method: 'POST', redirect: '/', fetchUser: true },
+    logoutData: { url: 'auth/logout', method: 'POST', redirect: '/login', makeRequest: true },
+    fetchData: {url: 'auth/user', method: 'GET', enabled: true},
+    refreshData: { url: 'auth/refresh', method: 'GET', enabled: true, interval: 30 }
 }
 
 export default config

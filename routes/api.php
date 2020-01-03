@@ -22,10 +22,11 @@ Route::group([
     Route::post('logout', 'AuthController@logout');
     Route::get('refresh', 'AuthController@refresh');
     Route::get('user', 'AuthController@user');
+    Route::post('checkEmail', 'AuthController@checkEmail');
 });
 
 Route::group([
-//    'middleware' => 'auth'
+    'middleware' => 'auth'
 ], function ($router) {
     Route::get('xml', 'Api\FeedController@getXml');
     Route::get('words', 'Api\FeedController@getWords');

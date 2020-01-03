@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\ApiController;
 use App\Parser\Parser;
-use Illuminate\Http\Request;
 
-class FeedController extends Controller
+class FeedController extends ApiController
 {
     /**
      * Get XML feed
@@ -17,16 +16,28 @@ class FeedController extends Controller
     public function getXml(Parser $parser)
     {
         try {
-            $data = $parser->xml(file_get_contents(public_path('headlines.xml')));
+            $data = $parser->xml(file_get_contents('https://www.theregister.co.uk/software/headlines.atom'));
 
-            return response()->json(['status' => 'success', 'data' => $data]);
+            return $this->responseWithSuccess(['data' => $data]);
         } catch (\Exception $e) {
-            return response()->json(['status' => 'error', 'error' => $e->getMessage()]);
+            return $this->responseWithError($e->getMessage());
         }
     }
 
+    /**
+     * Get top common words
+     *
+     * @param Parser $parser
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getWords(Parser $parser)
     {
-        $data = $parser->wiki(file_get_contents('https://en.wikipedia.org/wiki/Most_common_words_in_English'));
+        try {
+            $data = $parser->wiki('https://en.wikipedia.org/wiki/Most_common_words_in_English');
+
+            return $this->responseWithSuccess(['data' => $data]);
+        } catch (\Exception $e) {
+            return $this->responseWithError($e->getMessage());
+        }
     }
 }

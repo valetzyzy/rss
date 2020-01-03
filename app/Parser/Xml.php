@@ -10,7 +10,7 @@ class Xml implements ParserInterface
 {
 
     /**
-     * Parse method
+     * Parse xml feed
      *
      * @param $data
      * @return array
@@ -24,7 +24,7 @@ class Xml implements ParserInterface
             'subtitle' => $dataArray['subtitle'] ?? '',
             'author' => $dataArray['author'] ?? '',
             'logo' => $dataArray['logo'] ?? 'https://www.theregister.co.uk/Design/graphics/Reg_default/The_Register_r.png',
-            'updated_at' => Carbon::parse($dataArray['updated'] ?? Carbon::now()),
+            'updated_at' => Carbon::parse($dataArray['updated'] ?? Carbon::now())->format('d-m-Y'),
             'feed' => $this->parseEntries($dataArray['entry']),
         ];
     }
@@ -42,9 +42,9 @@ class Xml implements ParserInterface
         $parsedEntries = [];
         foreach ($entries as $entry) {
             $parsedEntries[] = [
-                'updated_at' => Carbon::parse($entry['updated'] ?? Carbon::now()),
+                'updated_at' => Carbon::parse($entry['updated'] ?? Carbon::now())->format('d-m-Y'),
                 'name' => $entry['author']['name'] ?? '',
-                'link' => $entry['link']['@href'] ?? '',
+                'href' => $entry['link']['@href'] ?? '',
                 'title' => $entry['title']['#text'] ?? '',
                 'text' => $entry['summary']['#text'] ?? '',
             ];

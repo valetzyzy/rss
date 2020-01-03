@@ -1,4 +1,18 @@
+.color-white {
+    color: #fff;
+}
 
+.feeds h2 {
+    font-size: 30px;
+}
+
+.feeds a:hover {
+    color: #666666;
+}
+
+.feeds h4 {
+    font-size: 15px;
+}
 
 
 

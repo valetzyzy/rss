@@ -3,20 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Hash;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Validator;
 
-class AuthController extends Controller
+class AuthController extends ApiController
 {
     /**
      * Create a new AuthController instance.
+     * @todo implement forgot password logic
      *
      * @return void
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register', 'checkEmail']]);
     }
 
     /**
@@ -29,8 +31,10 @@ class AuthController extends Controller
     {
         $user = User::where('email', '=', $request->get('email'))->first();
 
-        if (!$user || !$token = auth()->login($user)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+        if (!$user
+            || !Hash::check($request->get('password'), $user->password)
+            || !$token = auth()->login($user)) {
+            return $this->responseWithError('Invalid email or password', 401);
         }
 
         return $this->respondWithToken($token);
@@ -43,7 +47,22 @@ class AuthController extends Controller
      */
     public function user()
     {
-        return response()->json(auth()->user());
+        $user = auth()->user();
+
+        if (!$user) {
+            return $this->responseWithError('Invalid email or password', 401);
+        }
+
+        $data = [
+            'status' => 'success',
+            'data' => [
+                'id' => encrypt($user->id),
+                'email' => $user->email,
+                'name' => $user->name
+            ]
+        ];
+
+        return $this->responseWithSuccess($data);
     }
 
     /**
@@ -55,7 +74,7 @@ class AuthController extends Controller
     {
         auth()->logout();
 
-        return response()->json(['message' => 'Successfully logged out']);
+        return $this->responseWithSuccess(['message' => 'Successfully logged out']);
     }
 
     /**
@@ -78,13 +97,14 @@ class AuthController extends Controller
     {
         $rules = [
             'name' => 'required',
-            'email' => 'unique:users|required|email',
+            'email' => 'required|email|unique:users',
             'password' => 'required',
+            'passwordAgain' => 'required|same:passwordAgain',
         ];
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
-            return response()->json(['success' => false, 'error' => $validator->messages()]);
+            return $this->responseWithError($validator->getMessageBag()->all(), 400);
         }
 
         $user = new User([
@@ -94,7 +114,33 @@ class AuthController extends Controller
         ]);
         $user->save();
 
-        return $this->login($request);
+        return $this->responseWithSuccess(['status' => 'success']);
+    }
+
+    /**
+     * Check if email is exists
+     *
+     * @param Request $request
+     * @return
+     */
+    public function checkEmail(Request $request)
+    {
+        $rules = [
+            'email' => 'required|email',
+        ];
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return $this->responseWithError($validator->getMessageBag()->all(), 400);
+        }
+
+        $user = User::whereEmail($request->get('email'))->exists();
+
+        if ($user) {
+            return $this->responseWithError(['This Email already exists'], 409);
+        }
+
+        return $this->responseWithSuccess(['status' => 'success']);
     }
 
     /**
@@ -106,7 +152,7 @@ class AuthController extends Controller
      */
     protected function respondWithToken($token)
     {
-        return response()->json([
+        return $this->responseWithSuccess([
             'token' => $token,
             'status' => 'success'
         ])->header('Authorization', $token);

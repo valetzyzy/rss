@@ -12,6 +12,6 @@ interface ParserInterface
      * @param $data
      * @return mixed
      */
-    public function parse($data);
+    public function parse($data) : array;
 
 }
